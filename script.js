@@ -279,7 +279,8 @@ class APP {
       },
     });
 
-    workout.click();
+    //Checking for clicks
+    // workout.click();
   }
 
   //Setting workout to localStorge
