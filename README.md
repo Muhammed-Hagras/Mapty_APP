@@ -4,16 +4,21 @@
 
 ### Features
 
-## In this app, user can 👍
+## In this app, user can 
 
 - Add his Workouts for two workout types:
 
   - Running.
   - Cycling.
 
-- view his workouts and navigate between them.
+- View his workouts and navigate between them: 
 
-- Also View workouts even after loading page.
+  - On workout Click, map navigate you to its location.
+   
+
+- Also View workouts even after loading page:
+
+  - LocalStorage load your stored workouts
 
 ## Used technoliges and tools:
 
