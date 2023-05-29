@@ -4,7 +4,7 @@
 
 ### Features
 
-## In this app, user can 👍
+## In this app, user can
 
 - Add his Workouts for two workout types:
 
@@ -21,3 +21,7 @@
 - CSS
 - JS
 - leaflet JS
+
+### `Live Demo`
+
+Open [https://workout-mapty-app.netlify.app/](https://workout-mapty-app.netlify.app/) to view it.
