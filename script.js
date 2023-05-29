@@ -77,7 +77,13 @@ class APP {
   #workouts = [];
   #maZoomLevel = 13;
   constructor() {
+    //Get User's Postion
     this._getPoition();
+
+    //Get data from LocalStorage
+    this._getLocalStorage();
+
+    //Attaching Handlers
     form.addEventListener('submit', this._newWorkOut.bind(this));
     inputType.addEventListener('change', this._toggleElevationField);
     containerWorkouts.addEventListener('click', this._moveToPopup.bind(this));
@@ -101,6 +107,11 @@ class APP {
     }).addTo(this.#map);
     //on map click handler
     this.#map.on('click', this._showForm.bind(this));
+
+    //on page load  renderWorkoutMarker for stored Wokeouts
+    this.#workouts.forEach(work => {
+      this._renderWorkoutMarker(work);
+    });
   }
 
   _showForm(e) {
@@ -179,6 +190,9 @@ class APP {
 
     //Clear inputs + hide form
     this._hideForm();
+
+    //Set LocalStorage to all wokouts
+    this._setLocalStorage();
   }
 
   _renderWorkoutMarker(workout) {
@@ -251,15 +265,12 @@ class APP {
 
   _moveToPopup(e) {
     const workoutEl = e.target.closest('.workout');
-    console.log(workoutEl);
 
     if (!workoutEl) return;
 
     const workout = this.#workouts.find(
       work => work.id === workoutEl.dataset.id
     );
-
-    console.log({ workout });
 
     this.#map.setView(workout.coords, this.#maZoomLevel, {
       animate: true,
@@ -269,6 +280,31 @@ class APP {
     });
 
     workout.click();
+  }
+
+  //Setting workout to localStorge
+  _setLocalStorage() {
+    localStorage.setItem('workouts', JSON.stringify(this.#workouts));
+  }
+
+  //Getting workout from localStorge
+  _getLocalStorage() {
+    const data = JSON.parse(localStorage.getItem('workouts'));
+
+    if (!data) return;
+
+    this.#workouts = data;
+
+    //on page load  renderWorkout for stored Wokeouts
+    this.#workouts.forEach(work => {
+      this._renderWorkout(work);
+    });
+  }
+
+  //reset workout in localStorge
+  reset() {
+    localStorage.removeItem('workouts');
+    location.reload();
   }
 }
 
